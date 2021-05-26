@@ -1,0 +1,348 @@
+body {
+    font-family: monospace;
+    display: flex;
+    padding: 0;
+    margin: 5px 5px;
+}
+
+.container {
+    width: 1000px;
+    margin: auto;
+    border: 5px solid #80abf3;
+    border-radius: 5px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 4.5rem;
+    margin: auto;
+    text-align: center;
+    color: #80abf3;
+}
+
+.div-add {
+    width: 800px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-add {
+    width: 500px;
+    height: 45px;
+    padding: 0 5px;
+    margin: 0;
+    font-family: monospace;
+    font-size: 1.5rem;
+    border: 2px solid #80abf3;
+    border-radius: 5px;
+    outline: none;
+    color: #3b4793;
+}
+
+.input-add:focus {
+    border: 2px solid #4b5ccd;
+}
+
+.button-add {
+    width: 200px;
+    height: 49px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: #80abf3;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.button-add:hover {
+    background: #4b5ccd;
+}
+
+.container-all-task {
+    width: 840px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 700px;
+    overflow-y: auto;
+    padding: 5px 0;
+}
+
+.task-container {
+    width: 800px;
+    color: #80abf3;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.task-container:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.checkbox {
+    width: 45px;
+    height: 45px;
+    margin: 0 0 0 20px;
+}
+
+.task-text {
+    font-size: 2rem;
+    width: 565px;
+    word-break: break-all;
+    margin-left: 20px;
+}
+
+.task-text-check {
+    text-decoration: line-through;
+    color: #b1b1b1;
+}
+
+.button {
+    border: none;
+    background: #80abf3;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 3px;
+    font-size: 1rem;
+    margin: 0 0 0 20px;
+}
+
+.delete-button {
+    background-image: url("https://img.icons8.com/material/24/ffffff/delete-forever--v2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.delete-button:hover {
+    background: #4b5ccd;
+    background-image: url("https://img.icons8.com/material/24/ffffff/delete-forever--v2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.edit-button {
+    background-image: url("https://img.icons8.com/material-outlined/24/ffffff/edit--v1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.edit-button:hover {
+    background: #4b5ccd;
+    background-image: url("https://img.icons8.com/material-outlined/24/ffffff/edit--v1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.done-button {
+    background-image: url("https://img.icons8.com/material-rounded/24/ffffff/checkmark--v1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.done-button:hover {
+    background: #4b5ccd;
+    background-image: url("https://img.icons8.com/material-rounded/24/ffffff/checkmark--v1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cancel-button {
+    background-image: url("https://img.icons8.com/material-rounded/24/ffffff/delete-sign.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cancel-button:hover {
+    background: #4b5ccd;
+    background-image: url("https://img.icons8.com/material-rounded/24/ffffff/delete-sign.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.textarea-edit {
+    font-size: 2rem;
+    width: 557px;
+    word-break: break-all;
+    color: #80abf3;
+    font-family: monospace;
+    border: 2px solid #80abf3;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    margin: 1rem 0 1rem 20px;
+}
+
+.textarea-edit:focus {
+    border: 2px solid #4b5ccd;
+}
+
+@media (max-width: 900px) {
+
+    .container {
+        width: 650px;
+    }
+
+    .div-add {
+        width: 550px;
+    }
+
+    .input-add {
+        width: 300px;
+        height: 40px;
+    }
+
+    .button-add {
+        width: 150px;
+        height: 44px;
+    }
+
+    .container-all-task {
+        width: 580px;
+    }
+
+    .task-container {
+        width: 560px;
+    }
+
+    .checkbox {
+        width: 35px;
+        height: 35px;
+        margin: 0 0 0 20px;
+    }
+
+    .task-text {
+        font-size: 1.5rem;
+        width: 345px;
+    }
+
+    .button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .textarea-edit {
+        width: 337px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 660px) {
+
+    .container {
+        width: 450px;
+    }
+
+    .div-add {
+        width: 400px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-add {
+        width: 400px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    .button-add {
+        width: 150px;
+        height: 39px;
+        margin-top: 20px;
+        font-size: 1.5rem;
+    }
+
+    .container-all-task {
+        width: 435px;
+        max-height: 650px;
+    }
+
+    .task-container {
+        width: 415px;
+    }
+
+    .task-text {
+        font-size: 1.5rem;
+        width: 195px;
+    }
+
+    .textarea-edit {
+        width: 187px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 530px) {
+
+    .container {
+        width: 350px;
+        border: none;
+        padding: 0;
+    }
+
+    .div-add {
+        width: 300px;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-top: 10px;
+    }
+
+    .input-add {
+        width: 290px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    .button-add {
+        width: 150px;
+        height: 39px;
+        margin-top: 20px;
+        font-size: 1.5rem;
+    }
+
+    .container-all-task {
+        width: 315px;
+    }
+
+    .task-container {
+        width: 295px;
+    }
+
+    .checkbox {
+        width: 35px;
+        height: 35px;
+        margin: 0 0 0 10px;
+    }
+
+    .task-text {
+        font-size: 1.5rem;
+        width: 140px;
+        margin-left: 10px;
+    }
+
+    .button {
+        width: 35px;
+        height: 35px;
+        margin-left: 10px;
+    }
+
+    .textarea-edit {
+        width: 132px;
+        font-size: 1.5rem;
+        margin-left: 10px;
+    }
+}
+
