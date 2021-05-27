@@ -4,7 +4,7 @@ let textareaValue = '';
 let input = null;
 const content = document.getElementById('content-tasks');
 let isEdit = null;
-let result = null;
+let res = null;
 
 
 window.onload = async () => {
@@ -13,10 +13,10 @@ window.onload = async () => {
   input.addEventListener('keydown', onEnterPressAdd);
   const resp = await fetch('http://localhost:8000/allTasks', {
     method: 'GET'
-  })
+  });
 
-  result = await resp.json();
-  allTasks = result.data;
+  res = await resp.json();
+  allTasks = res.data;
 
   render();
 }
@@ -34,27 +34,27 @@ render = () => {
     container = (isEdit === index) ? editableTask(item, index) : Task(item, index);
     content.appendChild(container);
   });
-}
+};
 
 const updateValue = (e) => {
   valueInput = e.target.value;
-}
+};
 
 const updateTask = (e) => {
   textareaValue = e.target.value;
-}
+};
 
 const onEnterPressAdd = (e) => {
   if (e.code === 'Enter') {
     onAddClick();
   }
-}
+};
 
 const onEnterPressEdit = (e, index) => {
   if (e.code === 'Enter') {
     onDoneClick();
   }
-}
+};
 
 const onAddClick = async () => {
   if (!valueInput.trim()) {
@@ -62,6 +62,7 @@ const onAddClick = async () => {
     input.value = '';
     return;
   }
+
   const resp = await fetch('http://localhost:8000/createTask', {
     method: 'POST',
     headers: {
@@ -80,8 +81,21 @@ const onAddClick = async () => {
   render();
 }
 
-const onChangeCheckbox = (index) => {
-  allTasks[index].isCheck = !allTasks[index].isCheck;
+const onChangeCheckbox = async (index) => {
+  let { isCheck, id } = allTasks[index];
+
+  const resp = await fetch('http://localhost:8000/updateTask', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({id, isCheck: !isCheck})
+  })
+
+  res = await resp.json();
+  allTasks = res.data;
+
   render();
 }
 
@@ -107,7 +121,7 @@ const onCancelClick = (index) => {
 }
 
 const onDoneClick = async (index) => {
-  let {text, isCheck, id} = allTasks[index];
+  let { id } = allTasks[index];
 
   if (!textareaValue.trim()) {
     alert('Ты удалил весь текст, поэтому я удалю эту таску :)');
@@ -125,21 +139,21 @@ const onDoneClick = async (index) => {
     body: JSON.stringify({
       id: id,
       text: textareaValue.trim(),
-      isCheck: isCheck
     })
-  })
-  result = await resp.json();
-  allTasks = result.data;
+  });
+
+  res = await resp.json();
+  allTasks = res.data;
   isEdit = null;
   render();
-}
+};
 
 const cleaning = () => {
 
   while (content.firstChild) {
     content.removeChild(content.firstChild);
   }
-}
+};
 
 const Task = (item, index) => {
   const container = document.createElement('div');
@@ -177,7 +191,7 @@ const Task = (item, index) => {
   container.appendChild(buttonDelete);
 
   return container;
-}
+};
 
 const editableTask = (item, index) => {
   const container = document.createElement('div');
@@ -219,4 +233,4 @@ const editableTask = (item, index) => {
   container.appendChild(buttonCancelEdit);
 
   return container;
-}
+};
