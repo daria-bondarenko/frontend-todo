@@ -90,10 +90,7 @@ const onChangeCheckbox = async (index) => {
       'Content-Type': 'application/json;charset=utf-8',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({
-      id: id,
-      isCheck: !isCheck
-    })
+    body: JSON.stringify({id, isCheck: !isCheck})
   })
 
   res = await resp.json();
