@@ -11,7 +11,7 @@ window.onload = async () => {
   input = document.getElementById('add-task');
   input.addEventListener('keyup', updateValue);
   input.addEventListener('keydown', onEnterPressAdd);
-  const resp = await fetch('http://localhost:8000/allTasks', {
+  const resp = await fetch('http://localhost:4000/allTasks', {
     method: 'GET'
   });
 
@@ -63,7 +63,7 @@ const onAddClick = async () => {
     return;
   }
 
-  const resp = await fetch('http://localhost:8000/createTask', {
+  const resp = await fetch('http://localhost:4000/createTask', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -74,23 +74,23 @@ const onAddClick = async () => {
       isCheck: false
     })
   })
+
   let result = await resp.json();
   allTasks = result.data;
-
   input.value = '';
   render();
 }
 
 const onChangeCheckbox = async (index) => {
-  let { isCheck, id } = allTasks[index];
+  let { isCheck, _id, text } = allTasks[index];
 
-  const resp = await fetch('http://localhost:8000/updateTask', {
+  const resp = await fetch('http://localhost:4000/editTask', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({id, isCheck: !isCheck})
+    body: JSON.stringify({_id, isCheck: !isCheck, text})
   })
 
   res = await resp.json();
@@ -100,12 +100,18 @@ const onChangeCheckbox = async (index) => {
 }
 
 const onDeleteClick = async (index) => {
+  let { _id } = allTasks[index];
 
-  const resp = await fetch(`http://localhost:8000/deleteTask?id=${allTasks[index].id}`, {
-    method: 'DELETE'
+  const resp = await fetch('http://localhost:4000/deleteTask?_id=', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({_id})
   })
-  let result = await resp.json();
-  allTasks = result.data;
+  res = await resp.json();
+  allTasks = res.data;
 
   render();
 }
@@ -121,7 +127,7 @@ const onCancelClick = (index) => {
 }
 
 const onDoneClick = async (index) => {
-  let { id } = allTasks[index];
+  let { _id, isCheck} = allTasks[index];
 
   if (!textareaValue.trim()) {
     alert('Ты удалил весь текст, поэтому я удалю эту таску :)');
@@ -130,16 +136,13 @@ const onDoneClick = async (index) => {
     return;
   }
 
-  const resp = await fetch('http://localhost:8000/updateTask', {
+  const resp = await fetch('http://localhost:4000/editTask', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({
-      id: id,
-      text: textareaValue.trim(),
-    })
+    body: JSON.stringify({_id, text: textareaValue.trim(), isCheck})
   });
 
   res = await resp.json();
@@ -149,7 +152,6 @@ const onDoneClick = async (index) => {
 };
 
 const cleaning = () => {
-
   while (content.firstChild) {
     content.removeChild(content.firstChild);
   }
