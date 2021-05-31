@@ -82,7 +82,7 @@ const onAddClick = async () => {
 }
 
 const onChangeCheckbox = async (index) => {
-  let { isCheck, _id, text } = allTasks[index];
+  let { isCheck, _id } = allTasks[index];
 
   const resp = await fetch('http://localhost:4000/editTask', {
     method: 'PATCH',
@@ -90,7 +90,7 @@ const onChangeCheckbox = async (index) => {
       'Content-Type': 'application/json;charset=utf-8',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({_id, isCheck: !isCheck, text})
+    body: JSON.stringify({_id, isCheck: !isCheck})
   })
 
   res = await resp.json();
@@ -127,7 +127,7 @@ const onCancelClick = (index) => {
 }
 
 const onDoneClick = async (index) => {
-  let { _id, isCheck} = allTasks[index];
+  let { _id } = allTasks[index];
 
   if (!textareaValue.trim()) {
     alert('Ты удалил весь текст, поэтому я удалю эту таску :)');
@@ -142,7 +142,7 @@ const onDoneClick = async (index) => {
       'Content-Type': 'application/json;charset=utf-8',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({_id, text: textareaValue.trim(), isCheck})
+    body: JSON.stringify({_id, text: textareaValue.trim()})
   });
 
   res = await resp.json();
